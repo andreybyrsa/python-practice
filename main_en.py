@@ -1,12 +1,16 @@
 from math import sqrt
 from collections import Counter
+
+#unicode chart with residue and it's key 
 unicode = {10: 'a', 11: 'b', 12: 'c' , 13: 'd' , 14: 'e' , 15: 'f' , 16: 'g' , 17: 'h', \
     18: 'i', 19: 'j', 20: 'k', 21: 'l', 22: 'm', 23: 'n', 24: 'o', 25: 'p', 26: 'q', \
     27: 'r', 28: 's', 29: 't', 30: 'u', 31: 'v', 32: 'w', 33: 'x', 34: 'y', 35: 'z'}
-    
+
+#func
 def get_number_of_base(number):
     num_base = ''
     while number > 0:
+        #residue-key checking in a chart
         try:
             num_base = unicode[number % base] + num_base
         except:
@@ -16,6 +20,7 @@ def get_number_of_base(number):
 
 def check_int():
     while True:
+        #input checking: number / another type
         try:
             number = int(input())
             if number < float('inf'):
@@ -39,10 +44,12 @@ def print_base():
         ' = ' + str(number)
     return stroka
 
+#infinity cycle - script with exit command 
 while True:
     print('Что Вы хотите сделать: \n (1) открыть калькулятор; \n (2) свойства числа; \n (3) перевод в сс; \n (4) выход.')
     main_moving = check_int()
     if main_moving == 1:
+        #infinity cycle - script with exit command 
         while True:
             print('Действия с двумя числами: \n (1) + \n (2) - \n (3) * \n (4) / \n (5) ^ \n (6) выход')
             move = check_int()
@@ -80,6 +87,7 @@ while True:
     elif main_moving == 2:
         print('Введите целое число:')
         number = check_int()
+        #list with full number analytic
         number_analytic = list()
 
         if number % 2 == 0:
@@ -92,6 +100,8 @@ while True:
             number_analytic.append('натуральное, отрицательное')
             
         dividers = set()
+        #set for no same dividers in square number
+        #finding dividers with inverse divider, e.g 36 -> 1 / 36; 2 / 18; 3 / 12; 4 / 9; 6 / 6
         for divider in range(1, int(sqrt(number)) + 1):
             if number % divider == 0:
                 dividers.add(divider)
@@ -107,6 +117,7 @@ while True:
             string_of_dividers += ', ' + str(dividers[index])
         number_analytic.append('делители числа: ' + string_of_dividers)
 
+        #cycle for = function map() for each char in type
         number_analytic.append('суммы цифр с числе = ' + str(sum(map(int, str(number)))))
         number_analytic.append('количество цифр в числе = ' + str(len(str(number))))
         most_common_char = Counter(str(number)).most_common()
@@ -138,6 +149,7 @@ while True:
             print(print_base())
 
     elif main_moving == 4:
+        #break all scripts 
         exit()
 
     else:
